@@ -1,0 +1,31 @@
+﻿@model HometasksMonitoringPanel.ViewModels.HometasksStatusViewModel
+
+<h2 class="page-header">Hometasks status</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Repository</th>
+                @foreach (var task in Model.Tasks)
+                {
+                    <th>@task</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var repo in Model.Repos)
+            {
+                <tr>
+                    <td>
+                        <a href="@repo.AbsoluteUrl">@repo.Name</a> 
+                    </td>
+                    @foreach (var task in Model.Tasks)
+                    {
+                        <td><a href="@Model.GetUrl(repo.Name, task)">@Model.GetStatus(repo.Name, task)</a></td>
+                    }
+                </tr>
+            }
+        
+        </tbody>
+    </table>
+</div>
